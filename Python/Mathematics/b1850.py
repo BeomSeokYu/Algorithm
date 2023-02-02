@@ -26,6 +26,7 @@
 import sys
 input = sys.stdin.readline
 
+# 유클리드 호제법으로 최대 공약수 구하는 함수
 def gcd(a, b):
     big = max(a, b)
     small = min(a, b)
@@ -37,5 +38,5 @@ def gcd(a, b):
         return gcd(small, big%small)
 
 a, b = map(int, input().split())
-oneNum = gcd(a, b)
+oneNum = gcd(a, b) # 입력 받은 수의 최대 공약수가 1의 갯수로 바꿨을 때 최대공약수의 1의 갯수임.
 print("1"*oneNum)
