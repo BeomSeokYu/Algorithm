@@ -11,35 +11,26 @@
 *comments program : https://chrome.google.com/webstore/detail/boj-blog-post/ehhcjhfkaiohgflkjifmageahncijacd?hl=ko
 *********************************************************************/
 
-
+큰거 부터 가능한 가장 큰거 가능한 가장 작은거 배치
 '''
 
 import sys
 input = sys.stdin.readline
 
-n = int(input())
+n = int(input())                            # 돌덩어리 무리 갯수
 
-group = [i for i in range(1, n+1)]          # 돌의 정령 무리
+group = [i for i in range(1, n+1)]          # 돌덩어리 무리 (키작은 순)
 limitList = list(map(int, input().split())) # 시야 점수 제한 크기 리스트
-print(group)
-print(limitList)
 
-posDic = {}                                 # 위치별 배치 가능한 정령들
-for i in range(n):
-    posDic[i] = [e for e in range(limitList[i], n+1)] if limitList[i] > 0 else [e for e in range(-limitList[i], 0, -1)]
-print(posDic)
+result = []
+for i in limitList:
+    if i < 0:                               # 시야 점수가 0보다 작은 경우
+        result.append(group.pop(0))         # 작은놈 부터 배치
+    else:                                   # 클 경우
+        result.append(group.pop())          # 큰 놈부터 배치
 
-'''
-
-2 2 2 2 2
-
-이런 경우
-
-5 4 3 2 1
-이러면 끝
-
--3 -3 -3 -4 1
-
-1 2 3 4 5
-
-'''
+if limitList[n-1] < 0:                      # 마지막 무리는 시야 점수 10^9임 ㅅㄱ
+    print(-1)
+else:
+    for i in result:                        # 배치한거 출력
+        print(i, end=' ')
