@@ -11,59 +11,55 @@
 *comments program : https://chrome.google.com/webstore/detail/boj-blog-post/ehhcjhfkaiohgflkjifmageahncijacd?hl=ko
 *********************************************************************/
 
-같은 문자가 반복되는 단어의 경우 그 연속성이 빠를 수록
-높은 숫자가 배정돼야 함
+CSDAEWR
+ASDQWER
+SDAWSCA
+AQQWSXZ
 '''
 
 
 import sys
 input = sys.stdin.readline
 
-mapDict = {}
 wordList = []
-_sum = 0
 _maxLen = 0
-num = 9
-n = int(input())
+
+# 단어들 입력받아 단어 길이 최댓값 _maxLen과 wordList를 만듬
+n = int(input()) # 1 < n <= 10
 for i in range(n):
     temp = list(input().rstrip())
     size = len(temp)
     if size > _maxLen:
         _maxLen = size
-    _sum += size
     wordList.append(temp)
 
-selects = []
+scores = {}     # 각 단어들의 문자별 점수를 담을 딕셔너리
 while True:
-    selectOrder = []
     for word in wordList:
-        now = word[len(word) - _maxLen]
-        if len(word) > _maxLen-1 and now not in selects:
-            selects.append(now)
-            selectOrder.append([now, 10])
-        for j in range(len(selectOrder)):
-            try:
-                for k in wordList:
-                    selectOrder[j][1] = k.index(selectOrder[j][0], len(word) - _maxLen + 1, len(word))
-            except ValueError:
-                pass
-        selectOrder.sort(key=lambda x : x[1])
-
-    #print(selectOrder)
-    for k in selectOrder:
-        mapDict[k[0]] = str(num)
-        num -= 1
+        if len(word) > _maxLen - 1:
+            char = word[len(word) - _maxLen]    # 가장 자릿수가 높은 문자들부터 선택
+            if char not in scores:          # scores에 없으면 추가
+                scores[char] = 0
+            scores[char] += 10 ** _maxLen   # 각 자릿수에 맞는 점수 부여
 
     _maxLen -= 1
-    if _maxLen == 0:
+    if _maxLen == 0:    # 1의 자릿수 까지 확인했으면 끝
         break
-#print(mapDict)
 
-result = 0
+# 점수별로 정렬한 (문자:점수) 리스트 만들기
+sortedScores = sorted(scores.items(), key=lambda x : x[1], reverse=True)
+
+# 각 문자별 숫자 할당
+num = 9
+for i in sortedScores:
+    scores[i[0]] = num
+    num -= 1
+
+# 문자들을 숫자화하여 결과 출력
+result = []
 for word in wordList:
-    resultStr = ''
-    for j in word:
-        resultStr += mapDict[j]
-    #print(resultStr)
-    result += int(resultStr)
-print(result)
+    numberStr = ''
+    for char in word:
+        numberStr += str(scores[char])
+    result.append(int(numberStr))
+print(sum(result))
