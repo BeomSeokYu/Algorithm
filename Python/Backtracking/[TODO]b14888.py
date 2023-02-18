@@ -63,43 +63,17 @@ N개의 수와 N-1개의 연산자가 주어졌을 때,
 
 '''
 자 풀어보자
-[최댓값 규칙]
-[- / + *] 가 맞을까?
-1 2 3 4 5 6
- - - / + *
--1 -3 -1 4 24
-[+ / - *] 가 맞을까?
-3 1 -3 -8 -48
-모든 연산이 있는게 아니라도 위의 규칙이 맞을까?
-1 2 3 4 5 6
- - - / + +
--1 -4 -1 4 10
-3 6 1 -4 -10
-- 가 없는 경우는?
-[/ + *]
-[* + /]
+
 '''
-import sys, math
+import sys, itertools
 input = sys.stdin.readline
 
-#입력
-n = int(input())
-aList = list(map(int, input().split()))     # 숫자 리스트
-aList.sort()
-operNum = list(map(int, input().split()))   # 연산자 갯수 리스트
-oper = ['+', '-', '*', '/']                 # 각 인덱스 별 연산자
-maxRaw = [1, 3, 0, 2]                       # 마이너스를 포함해 최댓값을 갖는 경우 연산자 순서
-minRaw = [0, 3, 1, 2]                       # 마이너스를 포함해 최솟값을 갖는 경우 연산자 순서
-maxRawNo = [3, 0, 2]                        # 마이너스 없이 최댓값을 갖는 경우 연산자 순서
-minRawNo = [2, 0, 3]                        # 마이너스 없이 최솟값을 갖는 경우 연산자 순서
-
-def makeExp(aList, operNum, rawList):
+def makeExpList(aList, operList, permTuple):
     temp = aList[:]                         # 숫자 리스트 클론
     insertIdx = 1
-    for j in rawList:
-        for k in range(operNum[j]):
-            temp.insert(insertIdx, oper[j])
-            insertIdx += 2
+    for i in permTuple:
+        temp.insert(insertIdx, operList[i])
+        insertIdx += 2
     return temp
 
 def calExp(expList):
@@ -108,18 +82,34 @@ def calExp(expList):
         result = int(eval(str(result) + expList[j] + str(expList[j + 1])))
     return result
 
-def getMinMaxList():
-    maxExpList = []
-    minExpList = []
-    if operNum[1] > 0:
-        maxExpList = makeExp(aList, operNum, maxRaw)
-        minExpList = makeExp(aList, operNum, minRaw)
-    else:
-        minExpList = makeExp(aList, operNum, minRawNo)
-        maxExpList = makeExp(aList, operNum, maxRawNo)
-    return minExpList, maxExpList
-
-minEL, maxEL = getMinMaxList()
-
-print(calExp(maxEL))
-print(calExp(minEL))
+#입력
+n = int(input())
+aList = input().split()                     # 숫자 리스트
+operNum = list(map(int, input().split()))   # 연산자 갯수 리스트
+oper = ['+', '-', '*', '/']                 # 각 인덱스 별 연산자
+operList = []                       # 사용될 연산자 리스트
+for i in range(4):                  # 연산자 종류 만큼 반복
+    for j in range(operNum[i]):     # 연산자 종류 갯수 만큼 반복
+        operList.append(oper[i])
+print(operList)
+perm = list(itertools.permutations(range(len(operList)), len(operList)))  # 연산자 배치의 모든 경우의 수를 갖는 리스트
+print(perm)
+_min, _max = 1000000001, 0
+for i in perm:
+    expList = makeExpList(aList, operList, i)
+    print(expList)
+    result = calExp(expList)
+    print(result)
+    _max = max(result, _max)
+    _min = min(result, _min)
+print(_max)
+print(_min)
+'''
+[max]
+가장 큰 수랑 * > +
+[min]
+-가 있을 경우
+    가장 큰 수로 나눈다
+-가 없을 경우
+    가장 큰 수랑 곱한다 (그 앞에 마이너스 수)
+'''
