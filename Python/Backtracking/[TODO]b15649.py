@@ -79,9 +79,3 @@ def permutation(li, m):
                 temp.append(li[j])
         result.append(temp)
         idx = m - 1
-
-
-    print(result)
-
-n, m = map(int, input().split())
-permutation(range(1, n + 1), m)
