@@ -66,4 +66,4 @@ N개의 수와 N-1개의 연산자가 주어졌을 때,
 
 '''
 import sys, itertools
-input = sys.stdin.readline
+input = sys.stdin.ㅌ튜튱튜우튱튜ㅌ
