@@ -15,22 +15,33 @@ def swap(a, b):
     b = temp
     return (a, b)
 # 재귀를 이용하여 퀵 정렬 수행
-def mergeSort(start, end):
-    if end == start:
-        return start
-    else:
-        half = (end - start) // 2
-        l = mergeSort(start, half)
-        r = mergeSort(half+1, end)
-    
-        
+def mergeSort(list):
+    if len(list) < 2:
+        return list
+
+    mid = len(list) // 2
+    low_arr = mergeSort(list[:mid])
+    high_arr = mergeSort(list[mid:])
+
+    mergedList = []
+    l = h = 0
+    while l < len(low_arr) and h < len(high_arr):
+        if low_arr[l] < high_arr[h]:
+            mergedList.append(low_arr[l])
+            l += 1
+        else:
+            mergedList.append(high_arr[h])
+            h += 1
+    mergedList += low_arr[l:]
+    mergedList += high_arr[h:]
+    return mergedList
 
 # 정렬할 리스트 입력
 list = list(map(int, input("병합 정렬할 숫자를 띄어쓰기로 구분하여 입력 : ").split(' ')))
 n = len(list)
 # 병합 정렬
 print()
-mergeSort(list)
+list = mergeSort(list)
 # 정렬된 리스트 출력
 for i in list:
     print(i, end=' ')
