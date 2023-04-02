@@ -18,7 +18,7 @@ def union_parent(parent, a, b):
 v, e = map(int, input().split())
 parent = [0] * (v + 1) # 부모 테이블 초기화
 
-# 모든 간선을 담을 리스트롸 최종 비용을 담을 변수
+# 모든 간선을 담을 리스트와 최종 비용을 담을 변수
 edges = []
 result = 0
 
