@@ -2,8 +2,7 @@ def solution(id_pw, db):
     answer = ''
     id_db = []
     pw_db = []
-    vaildId = False
-    vaildPw = False
+
     for i, p in db:
         id_db.append(i)
         pw_db.append(p)
