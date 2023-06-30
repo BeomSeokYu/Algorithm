@@ -47,7 +47,7 @@
 
 
 ## 알고리즘 스터디 정리 노트
-- [알고리즘 정리 노션 링크](https://bsnote.notion.site/0774c3aa088045858926c1a96ae7a837?v=bc40762274ea4643b6e0571725ccca6b&pvs=4 "알고리즘 정리")
+- [노션 페이지로 이동](https://bsnote.notion.site/fed6cf66eef24ee9a6cd4950a535f805?pvs=4 "알고리즘 정리")
 
 <br><br><br>
 
