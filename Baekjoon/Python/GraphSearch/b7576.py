@@ -37,3 +37,5 @@ for n in range(N):
         result = max(max(V[n]), result)
 
 print(result) if result == -1 else print(result - 2)
+
+# 커밋 메시지 수정용 메시지
