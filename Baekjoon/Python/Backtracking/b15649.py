@@ -60,22 +60,11 @@
 143
 '''
 import sys
+from itertools import permutations
 input = sys.stdin.readline
 
-# n, m = map(int, input().split())
-# for li in itertools.permutations(range(1, n + 1), m):
-#     for i in li:
-#         print(i, end= ' ')
-#     print()
-
-def permutation(li, m):
-    idx = m
-    result = []
-    fix = [li[i] for i in range(m)]
-    for i in range(len(fix)):
-        temp = [i for i in fix]
-        for j in range(len(li)):
-            if j not in fix:
-                temp.append(li[j])
-        result.append(temp)
-        idx = m - 1
+n, m = map(int, input().split())
+for li in permutations(range(1, n + 1), m):
+    for i in li:
+        print(i, end= ' ')
+    print()
