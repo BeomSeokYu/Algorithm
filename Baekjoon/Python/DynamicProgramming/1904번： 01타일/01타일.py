@@ -26,9 +26,10 @@ input = sys.stdin.readline
 def fibo(n):
     dp = [0] * (n + 1) # DP 테이블
     dp[1] = 1
-    dp[2] = 2
+    if n > 1:
+        dp[2] = 2
     for i in range(3, n+1):
-        dp[i] = (dp[i-1] + dp[i-2]) % 15746
+        dp[i] = (dp[i-1] + dp[i-2]) % 15746 # 너무 커지는 것을 방지하기 위해 바로 모듈러 연산 수행
     return dp[n]
 
 n = int(input())
