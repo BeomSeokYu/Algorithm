@@ -14,7 +14,6 @@
 - 3잔을 연속해서 마실 수는 없다 -> 연속해서 2잔까지
 - 위의 조건에서 가장 많이 마실 수 있는 경우를 찾아야 함
 -> DP 사용
--> 상향? 하향?
 '''
 import sys
 input = sys.stdin.readline
@@ -36,4 +35,5 @@ for i in range(n):
         dp[i] = max(dp[i-1], dp[i-2] + li[i], li[i-1] + li[i])
     else:
         dp[i] = max(dp[i-1], dp[i-2] + li[i], dp[i-3] + li[i-1] + li[i])
+
 print(max(dp))
