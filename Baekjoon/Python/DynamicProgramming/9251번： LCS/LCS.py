@@ -18,6 +18,17 @@ LCS(Longest Common Subsequence, 최장 공통 부분 수열)
 점화식:
 - 만약 X[i-1]와 Y[j-1]가 같다면, dp[i][j] = dp[i-1][j-1] + 1
 - 다르다면, dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+
+        0   1   2   3   4   5   6
+            A   C   A   Y   K   P
+0       0   0   0   0   0   0   0
+1   C   0   0   1   1   1   1   1
+2   A   0   1   1   2   2   2   2
+3   P   0   1   1   2   2   2   3
+4   C   0   1   2   2   2   2   3
+5   A   0   1   2   3   3   3   3
+6   K   0   1   2   3   3   4   4
+
 '''
 import sys
 input = sys.stdin.readline
