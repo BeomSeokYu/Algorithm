@@ -1,4 +1,5 @@
 import sys
+sys.setrecursionlimit(10**7)		# 재채점 ReculsionError로 추가
 input = sys.stdin.readline
 
 # 특정 원소가 속한 집합을 찾기
