@@ -72,5 +72,3 @@ elif val % 3 == 0:
   result = 'Fizz'
 elif val % 5 == 0:
   result = 'Buzz'
-
-print(result)
